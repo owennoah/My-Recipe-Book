@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- Premium Leather Gradient -->
+    <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ab7345"/>
+      <stop offset="0.5" stop-color="#835229"/>
+      <stop offset="1" stop-color="#3b210c"/>
+    </linearGradient>
+    
+    <!-- Outer Edge Highlight & Shadow for 3D effect -->
+    <linearGradient id="edge-highlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.4)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,0.8)"/>
+    </linearGradient>
+    
+    <!-- Debossed Drop Shadow for internal elements -->
+    <filter id="deboss">
+      <feDropShadow dx="0" dy="1" stdDeviation="0.5" flood-color="rgba(255,255,255,0.3)" />
+      <feDropShadow dx="0" dy="-1" stdDeviation="0.5" flood-color="rgba(0,0,0,0.7)" />
+    </filter>
+  </defs>
+
+  <!-- Base Leather Panel -->
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="url(#leather)"/>
+  
+  <!-- Outer Bevel -->
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="none" stroke="url(#edge-highlight)" stroke-width="2"/>
+
+  <!-- Stitched Border -->
+  <rect x="9" y="9" width="46" height="46" rx="8" fill="none" stroke="#fdf5e6" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.6"/>
+  <!-- Stitch Shadow/Deboss -->
+  <rect x="9" y="8.5" width="46" height="46" rx="8" fill="none" stroke="#110802" stroke-width="1" stroke-dasharray="3 3" opacity="0.8"/>
+
+  <!-- Spoon Icon - Debossed -->
+  <g fill="#1a0f05" filter="url(#deboss)">
+    <!-- Handle -->
+    <rect x="29.5" y="32" width="5" height="18" rx="2.5" />
+    <!-- Bowl -->
+    <ellipse cx="32" cy="22" rx="7" ry="10" />
+    <!-- Inner bowl reflection -->
+    <ellipse cx="32" cy="20" rx="4" ry="6" fill="#3b210c" />
+  </g>
+</svg>

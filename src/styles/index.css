@@ -1,0 +1,306 @@
+@import '@fontsource/caveat/400.css';
+@import '@fontsource/lora/400.css';
+@import '@fontsource/lora/700.css';
+@import '@fontsource/lora/400-italic.css';
+@import '@fontsource/playfair-display/700.css';
+
+:root {
+  /* Colors - Premium Leather Palette */
+  --c-leather-light: #ab7345;
+  --c-leather: #835229;
+  --c-leather-dark: #5c3514;
+  --c-leather-deep: #3b210c;
+  
+  --c-stitch: #fdf5e6; /* warmer, more realistic thread */
+  --c-paper: #f4efdf;
+  --c-paper-dark: #e1d8c1;
+  --c-ink: #2b2721;
+  --c-ink-light: #6a6358;
+  
+  --c-brass-light: #e6cd8e;
+  --c-brass: #cda856;
+  --c-brass-dark: #9f7d34;
+  --c-brass-shadow: #4d3a12;
+  
+  /* Modern Skeuomorphic Shadows (softer, more realistic lighting) */
+  --shadow-deboss: inset 0 3px 6px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.15);
+  --shadow-emboss: 0 4px 10px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.25);
+  --shadow-text-deboss: 0 -1px 1px rgba(0,0,0,0.7), 0 1px 1px rgba(255,255,255,0.1);
+  --shadow-text-emboss: 0 1px 2px rgba(0,0,0,0.8), 0 -1px 0 rgba(255,255,255,0.1);
+  --shadow-page: -2px 0 8px rgba(0,0,0,0.2), -5px 0 20px rgba(0,0,0,0.15), inset 2px 0 4px rgba(255,255,255,0.8);
+
+  /* Fonts */
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-paper: 'Lora', serif;
+  --font-display: 'Playfair Display', serif;
+  --font-hand: 'Caveat', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Text Selection */
+::selection {
+  background-color: var(--c-leather-light);
+  color: #fff;
+  text-shadow: none;
+}
+::-moz-selection {
+  background-color: var(--c-leather-light);
+  color: #fff;
+  text-shadow: none;
+}
+
+/* Premium Leather Background */
+body {
+  font-family: var(--font-ui);
+  /* A rich radial gradient combined with a fixed, subtle noise overlay */
+  background: radial-gradient(circle at 50% 30%, var(--c-leather), var(--c-leather-deep)) fixed;
+  color: var(--c-stitch);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Subtle noise overlay applied via a pseudo-element so it stays fixed */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+#root {
+  width: 100%;
+  max-width: 600px;
+  background: transparent; /* Let body background show through */
+  position: relative;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,0,0,0.5); /* Outer edge of the book */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Typography Utilities */
+.text-deboss {
+  color: var(--c-leather-deep);
+  text-shadow: var(--shadow-text-deboss);
+}
+
+.text-emboss {
+  color: var(--c-stitch);
+  text-shadow: var(--shadow-text-emboss);
+}
+
+/* Premium Gold Foil Stamping */
+.gold-foil {
+  background: linear-gradient(to bottom, #fdf5e6 0%, #cda856 30%, #8a6a2a 70%, #fdf5e6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  /* Simulates being pressed into the leather */
+  filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.9)) drop-shadow(0 1px 1px rgba(255,255,255,0.2));
+}
+
+/* Realistic Stitching */
+.stitched-border {
+  /* For the boxes, we'll keep a subtle debossed track with a custom dashed outline,
+     but we'll make it look like a physical pressed groove. */
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.1);
+  padding: 12px;
+  position: relative;
+  outline: 1px dashed rgba(253, 245, 230, 0.4);
+  outline-offset: -4px;
+}
+
+/* The iOS 6 Deep Groove + Stitching */
+.stitched-line, .app-header::after, .tab-bar::before {
+  /* The trough/groove */
+  height: 14px;
+  background-color: rgba(0,0,0,0.15); /* Darken the leather inside the groove */
+  border-top: 2px solid rgba(0,0,0,0.7); /* Hard shadow top edge */
+  border-bottom: 1px solid rgba(255,255,255,0.25); /* Highlight bottom edge */
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.6); /* Deep inner shadow */
+  
+  /* The thread sitting inside the groove */
+  /* SVG: 24x14. Holes at y=7. Thread from x=4 to x=18. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='14'%3E%3C!-- Holes --%3E%3Ccircle cx='4' cy='7' r='2' fill='%231a0a00' /%3E%3Ccircle cx='20' cy='7' r='2' fill='%231a0a00' /%3E%3C!-- Hole Highlight --%3E%3Cpath d='M 2,8 A 2,2 0 0,0 6,8' stroke='rgba(255,255,255,0.3)' stroke-width='1' fill='none' /%3E%3Cpath d='M 18,8 A 2,2 0 0,0 22,8' stroke='rgba(255,255,255,0.3)' stroke-width='1' fill='none' /%3E%3C!-- Thread Shadow --%3E%3Crect x='4' y='7.5' width='16' height='3' rx='1.5' fill='rgba(0,0,0,0.8)' /%3E%3C!-- Thread Body (slight angle for realism) --%3E%3Cpath d='M 4,6 L 20,7.5 L 20,9.5 L 4,8 Z' fill='%23e6d1b8' /%3E%3C!-- Thread Highlight --%3E%3Cpath d='M 4,6.5 L 19,8' stroke='rgba(255,255,255,0.8)' stroke-width='1' fill='none' /%3E%3C!-- Thread Texture/Shading --%3E%3Cpath d='M 4,7.5 L 20,9' stroke='%238c6a46' stroke-width='1' fill='none' opacity='0.8' /%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+  border-left: none;
+  border-right: none;
+}
+
+.stitched-line {
+  margin: 16px -24px; /* bleed to edges of paper */
+}
+
+/* Leather Panels (Cards) */
+.leather-panel {
+  background: linear-gradient(to bottom, var(--c-leather), #764823);
+  border-radius: 12px;
+  box-shadow: var(--shadow-emboss);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+}
+
+.leather-inset {
+  background: inset linear-gradient(to bottom, var(--c-leather-deep), var(--c-leather-dark));
+  background-color: var(--c-leather-dark); /* Fallback */
+  border-radius: 10px;
+  box-shadow: var(--shadow-deboss);
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(0,0,0,0.8);
+}
+
+/* Brass Buttons */
+.btn-brass {
+  background: linear-gradient(to bottom, var(--c-brass-light), var(--c-brass) 40%, var(--c-brass-dark));
+  border: 1px solid var(--c-brass-shadow);
+  border-radius: 6px;
+  color: #2b1f06;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  font-weight: 700;
+  padding: 10px 18px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.8), inset 0 -1px 1px rgba(0,0,0,0.2);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-brass:active {
+  background: linear-gradient(to bottom, var(--c-brass-dark), var(--c-brass) 60%, var(--c-brass-light));
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), inset 0 0 2px rgba(0,0,0,0.8);
+  transform: translateY(2px);
+  color: #1a1202;
+}
+
+/* Pages (The Paper Part) */
+.paper-page {
+  background-color: var(--c-paper);
+  /* A very soft, high-quality paper texture */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  color: var(--c-ink);
+  font-family: var(--font-paper);
+  border-radius: 0 4px 4px 0; /* right-side pages */
+  box-shadow: var(--shadow-page);
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Spine shading to give the book depth */
+.paper-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0; width: 30px;
+  background: linear-gradient(to right, rgba(0,0,0,0.15), rgba(0,0,0,0.05) 30%, transparent);
+  pointer-events: none;
+}
+
+/* Selection within paper pages */
+.paper-page ::selection {
+  background-color: var(--c-brass-light);
+  color: var(--c-ink);
+}
+
+.handwritten {
+  font-family: var(--font-hand);
+  color: #214366; /* realistic fountain pen blue */
+  font-size: 1.5rem;
+  transform: rotate(-1.5deg);
+  display: inline-block;
+}
+
+/* App Header & Tab Bar */
+.app-header {
+  background: linear-gradient(to bottom, var(--c-leather), var(--c-leather-deep));
+  padding: 16px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
+.app-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  display: block;
+}
+
+.tab-bar {
+  background: linear-gradient(to top, var(--c-leather-deep), var(--c-leather-dark));
+  display: flex;
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.8);
+  z-index: 10;
+  position: relative;
+}
+
+.tab-bar::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 14px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(253, 245, 230, 0.5);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-right: 1px solid rgba(0,0,0,0.5);
+  border-left: 1px solid rgba(255,255,255,0.03);
+  transition: all 0.2s;
+}
+.tab-btn:first-child { border-left: none; }
+.tab-btn:last-child { border-right: none; }
+
+.tab-btn.active {
+  background: inset linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1));
+  color: var(--c-stitch);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.5);
+}
+
+.tab-icon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.8));
+  transition: all 0.2s;
+}
+.tab-btn.active .tab-icon {
+  filter: drop-shadow(0 0 8px rgba(253,245,230,0.4)) drop-shadow(0 -1px 1px rgba(0,0,0,0.8));
+  transform: scale(1.05);
+}
+.tab-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
