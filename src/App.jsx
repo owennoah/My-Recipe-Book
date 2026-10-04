@@ -111,12 +111,12 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Theme state
-  const [theme, setTheme] = useState(() => localStorage.getItem('sas:theme') || 'leather');
+  // Theme state forced back to Leather (Wallet) mode
+  const [theme, setTheme] = useState('leather');
   
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('sas:theme', theme);
+    localStorage.removeItem('sas:theme'); // Clear any stuck barbie state
   }, [theme]);
 
   const toggleTheme = () => {
