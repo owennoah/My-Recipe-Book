@@ -162,13 +162,7 @@ const App = () => {
         </header>
       ) : (
         <header className="app-header">
-          <button 
-            onClick={toggleTheme}
-            className="theme-toggle-btn"
-            title="Switch Theme"
-          >
-            🎀 Barbie Mode
-          </button>
+          {/* <button onClick={toggleTheme} className="theme-toggle-btn" title="Switch Theme">🎀 Barbie Mode</button> */}
           <h1 className="gold-foil" style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', margin: 0, letterSpacing: '1px' }}>
             Saddle & Spoon
           </h1>
@@ -176,11 +170,11 @@ const App = () => {
       )}
 
       {/* When in Barbie mode, put the toggle somewhere else so it doesn't ruin the header */}
-      {theme === 'barbie' && (
+      {/* {theme === 'barbie' && (
          <button onClick={toggleTheme} className="theme-toggle-btn barbie-floating-toggle">
             🧵 Leather Mode
          </button>
-      )}
+      )} */}
 
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         <Routes>
