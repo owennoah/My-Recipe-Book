@@ -11,7 +11,7 @@
   --c-leather-dark: #5c3514;
   --c-leather-deep: #3b210c;
   
-  --c-stitch: #fdf5e6; /* warmer, more realistic thread */
+  --c-stitch: #fdf5e6;
   --c-paper: #f4efdf;
   --c-paper-dark: #e1d8c1;
   --c-ink: #2b2721;
@@ -22,7 +22,11 @@
   --c-brass-dark: #9f7d34;
   --c-brass-shadow: #4d3a12;
   
-  /* Modern Skeuomorphic Shadows (softer, more realistic lighting) */
+  --c-title-gold-1: #fdf5e6;
+  --c-title-gold-2: #cda856;
+  --c-title-gold-3: #8a6a2a;
+  
+  /* Modern Skeuomorphic Shadows */
   --shadow-deboss: inset 0 3px 6px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.15);
   --shadow-emboss: 0 4px 10px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.25);
   --shadow-text-deboss: 0 -1px 1px rgba(0,0,0,0.7), 0 1px 1px rgba(255,255,255,0.1);
@@ -34,6 +38,111 @@
   --font-paper: 'Lora', serif;
   --font-display: 'Playfair Display', serif;
   --font-hand: 'Caveat', cursive;
+}
+
+/* 🎀 BARBIE THEME STRUCTURAL OVERRIDES 🎀 */
+/* We use !important to override the leather structural CSS when Barbie mode is active */
+html[data-theme='barbie'] body {
+  background: linear-gradient(135deg, #ff99cc, #ff3399) !important;
+}
+html[data-theme='barbie'] body::before {
+  background-image: none !important; /* Remove leather noise */
+}
+
+/* The Plastic Frame Container */
+html[data-theme='barbie'] .leather-inset {
+  background: #fff0f5 !important;
+  border: 6px solid #ff3399 !important;
+  border-radius: 24px !important;
+  box-shadow: 0 10px 25px rgba(204, 0, 102, 0.5), inset 0 4px 10px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Glossy White Recipe Cards */
+html[data-theme='barbie'] .leather-panel {
+  background: linear-gradient(to bottom, #ffffff, #fff0f5) !important;
+  border: 2px solid #ffb3d9 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 12px rgba(255, 102, 178, 0.3), inset 0 2px 4px rgba(255, 255, 255, 1) !important;
+}
+
+/* Pink Ribbon Header */
+html[data-theme='barbie'] .app-header {
+  background: linear-gradient(to bottom, #ff4dff, #e600ac) !important;
+  box-shadow: 0 4px 15px rgba(230, 0, 172, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.5) !important;
+  border-bottom: 3px solid #ffb3d9 !important;
+}
+
+/* Tab Bar */
+html[data-theme='barbie'] .tab-bar {
+  background: linear-gradient(to top, #ff1a8c, #ff66b2) !important;
+  box-shadow: 0 -4px 15px rgba(230, 0, 172, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.5) !important;
+}
+html[data-theme='barbie'] .tab-btn.active {
+  background: rgba(255,255,255,0.3) !important;
+  color: white !important;
+  box-shadow: inset 0 2px 5px rgba(204, 0, 102, 0.5) !important;
+  border-radius: 12px;
+}
+
+/* Remove Stitches - Replace with simple pink dividers */
+html[data-theme='barbie'] .app-header::after,
+html[data-theme='barbie'] .tab-bar::before,
+html[data-theme='barbie'] .stitched-line {
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: rgba(255, 102, 178, 0.3) !important;
+  height: 2px !important;
+  margin: 12px 0 !important;
+}
+
+/* Hot Pink Pill Buttons (OPEN) */
+html[data-theme='barbie'] .btn-brass {
+  background: linear-gradient(to bottom, #ff66cc, #e60073) !important;
+  border: 2px solid #ff99ff !important;
+  border-radius: 20px !important; /* Pill shape */
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+  box-shadow: 0 4px 8px rgba(230, 0, 172, 0.4), inset 0 3px 5px rgba(255,255,255,0.6) !important;
+}
+html[data-theme='barbie'] .btn-brass:active {
+  background: linear-gradient(to bottom, #e60073, #ff66cc) !important;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4) !important;
+}
+html[data-theme='barbie'] .theme-toggle-btn {
+  background: linear-gradient(to bottom, #ffffff, #ffccf2) !important;
+  border: 2px solid #ff99ff !important;
+  color: #e60073 !important;
+  border-radius: 12px !important;
+}
+
+/* Typography Overrides */
+html[data-theme='barbie'] .text-emboss,
+html[data-theme='barbie'] .text-deboss {
+  color: #e60073 !important;
+  text-shadow: 1px 1px 0px rgba(255,255,255,1) !important;
+}
+
+/* Barbie Title Logo */
+html[data-theme='barbie'] .gold-foil {
+  background: white !important;
+  -webkit-text-fill-color: white !important;
+  color: white !important;
+  font-family: var(--font-hand) !important; /* Playful cursive */
+  font-size: 2.5rem !important;
+  transform: rotate(-3deg);
+  display: inline-block;
+  filter: drop-shadow(0 2px 0px #cc0066) drop-shadow(0 4px 4px rgba(204,0,102,0.6)) !important;
+}
+
+/* Paper Pages -> Glittery Pink */
+html[data-theme='barbie'] .paper-page {
+  background-color: #fff0f5 !important;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08' fill='%23ff99cc'/%3E%3C/svg%3E") !important;
+  color: #66004d !important;
+}
+html[data-theme='barbie'] .paper-page::before {
+  background: linear-gradient(to right, rgba(255,102,178,0.2), transparent) !important;
 }
 
 * {
@@ -101,14 +210,14 @@ body::before {
   text-shadow: var(--shadow-text-emboss);
 }
 
-/* Premium Gold Foil Stamping */
+/* Premium Gold Foil Stamping (or Holographic in Barbie mode) */
 .gold-foil {
-  background: linear-gradient(to bottom, #fdf5e6 0%, #cda856 30%, #8a6a2a 70%, #fdf5e6 100%);
+  background: linear-gradient(to bottom, var(--c-title-gold-1) 0%, var(--c-title-gold-2) 30%, var(--c-title-gold-3) 70%, var(--c-title-gold-1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  /* Simulates being pressed into the leather */
+  /* Simulates being pressed into the leather/plastic */
   filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.9)) drop-shadow(0 1px 1px rgba(255,255,255,0.2));
 }
 
@@ -236,6 +345,28 @@ body::before {
   position: relative;
   z-index: 10;
   box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
+.theme-toggle-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(to bottom, var(--c-brass-light), var(--c-brass) 50%, var(--c-brass-dark));
+  border: 1px solid var(--c-brass-shadow);
+  color: #1a1202;
+  font-family: var(--font-ui);
+  font-weight: bold;
+  font-size: 0.65rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.6);
+  cursor: pointer;
+  text-transform: uppercase;
+  z-index: 20;
+}
+.theme-toggle-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .app-header::after {
