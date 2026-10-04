@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, useParams, Link } from 'react-router-dom';
 import { ALL_BUILTIN_RECIPES, getRecipeById } from './data/recipes/index.js';
 import { CATEGORIES } from './data/categories.js';
@@ -111,14 +111,33 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Theme state
+  const [theme, setTheme] = useState(() => localStorage.getItem('sas:theme') || 'leather');
+  
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('sas:theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'leather' ? 'barbie' : 'leather');
+  };
+
   const tabs = [
     { path: '/', label: 'Recipes', icon: '📖' },
     { path: '/categories', label: 'Index', icon: '🗂️' }
   ];
 
   return (
-    <>
+    <div className={`theme-${theme}`} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <header className="app-header">
+        <button 
+          onClick={toggleTheme}
+          className="theme-toggle-btn"
+          title="Switch Theme"
+        >
+          {theme === 'leather' ? '🎀 Barbie Mode' : '🧵 Leather Mode'}
+        </button>
         <h1 className="gold-foil" style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', margin: 0, letterSpacing: '1px' }}>
           Saddle & Spoon
         </h1>
@@ -144,7 +163,7 @@ const App = () => {
           </button>
         ))}
       </nav>
-    </>
+    </div>
   );
 };
 
