@@ -130,18 +130,57 @@ const App = () => {
 
   return (
     <div className={`theme-${theme}`} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <header className="app-header">
-        <button 
-          onClick={toggleTheme}
-          className="theme-toggle-btn"
-          title="Switch Theme"
-        >
-          {theme === 'leather' ? '🎀 Barbie Mode' : '🧵 Leather Mode'}
-        </button>
-        <h1 className="gold-foil" style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', margin: 0, letterSpacing: '1px' }}>
-          Saddle & Spoon
-        </h1>
-      </header>
+      {theme === 'barbie' ? (
+        <header className="barbie-header-container">
+          {/* The Circular Badge */}
+          <div className="barbie-badge">
+            <svg viewBox="0 0 100 100" className="barbie-silhouette">
+              {/* Approximated silhouette shape */}
+              <circle cx="50" cy="50" r="50" fill="#ffb3d9" />
+              <circle cx="50" cy="50" r="45" fill="#ff1a8c" />
+              <path d="M 50,20 C 30,20 25,40 30,60 C 35,75 50,85 50,85 C 50,85 65,75 70,60 C 75,40 70,20 50,20 Z" fill="#fff" />
+              {/* Ponytail hint */}
+              <path d="M 65,30 C 80,20 90,40 75,55" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
+            </svg>
+          </div>
+
+          {/* The Giant Logo Text */}
+          <div className="barbie-huge-logo">
+            Barbie
+          </div>
+
+          {/* The Ribbon */}
+          <div className="barbie-ribbon">
+            <div className="ribbon-tail left"></div>
+            <div className="ribbon-center">
+              <span className="ribbon-heart">♥</span>
+              <h2 className="ribbon-text">Saddle & Spoon</h2>
+              <span className="ribbon-heart">♥</span>
+            </div>
+            <div className="ribbon-tail right"></div>
+          </div>
+        </header>
+      ) : (
+        <header className="app-header">
+          <button 
+            onClick={toggleTheme}
+            className="theme-toggle-btn"
+            title="Switch Theme"
+          >
+            🎀 Barbie Mode
+          </button>
+          <h1 className="gold-foil" style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', margin: 0, letterSpacing: '1px' }}>
+            Saddle & Spoon
+          </h1>
+        </header>
+      )}
+
+      {/* When in Barbie mode, put the toggle somewhere else so it doesn't ruin the header */}
+      {theme === 'barbie' && (
+         <button onClick={toggleTheme} className="theme-toggle-btn barbie-floating-toggle">
+            🧵 Leather Mode
+         </button>
+      )}
 
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         <Routes>
